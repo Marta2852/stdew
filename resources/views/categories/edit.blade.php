@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="max-w-md mx-auto p-6">
 
-        <h1 class="text-2xl font-bold mb-6">✏️ Edit Category</h1>
+        <h1 class="text-2xl font-bold mb-6"> Edit Category</h1>
 
         <form method="POST" action="{{ route('categories.update', $category) }}">
             @csrf
@@ -25,7 +25,7 @@
             @method('DELETE')
 
             <button class="text-red-600">
-                🗑 Delete Category
+                Delete Category
             </button>
         </form>
 

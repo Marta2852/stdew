@@ -1,7 +1,7 @@
-<nav class="bg-green-700 text-white px-6 py-3 flex items-center justify-between">
+<nav class="bg-white text-white px-6 py-3 flex items-center justify-between">
     {{-- Left: Brand --}}
     <a href="{{ route('dashboard') }}" class="font-bold text-lg">
-        🌱 Stardew Tracker
+        Stardew Tracker
     </a>
 
     {{-- Center: Links --}}
@@ -20,6 +20,13 @@
         class="{{ request()->routeIs('items.*') ? 'underline font-semibold' : '' }}">
         Checklist
         </a>
+
+        <a href="{{ route('achievements.index') }}"
+        class="{{ request()->routeIs('achievements.*') ? 'underline font-semibold' : '' }}">
+        Achievements
+        </a>
+
+
         </div>
 
     {{-- Right: User --}}
@@ -28,7 +35,7 @@
 
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button class="bg-green-900 px-3 py-1 rounded">
+            <button class="bg-purple-600 text-white px-3 py-1 rounded">
                 Logout
             </button>
         </form>

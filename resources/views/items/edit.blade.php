@@ -25,7 +25,7 @@
             @method('DELETE')
 
             <button class="text-red-600">
-                🗑 Delete Item
+                 Delete Item
             </button>
         </form>
 

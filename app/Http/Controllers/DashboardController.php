@@ -4,20 +4,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\ChecklistItem;
+use App\Models\Achievement;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $userId = Auth::id();
+        $categories = Category::where('user_id', auth()->id())->get();
 
-        $categories = Category::with('items')
-            ->where('user_id', $userId)
+        $recentAchievements = Achievement::where('user_id', auth()->id())
+            ->where('is_unlocked', true)
+            ->orderByDesc('updated_at') 
+            ->take(4)
             ->get();
 
-        $allItems = ChecklistItem::whereHas('category', function ($q) use ($userId) {
-            $q->where('user_id', $userId);
+        $totalAchievements = Achievement::where('user_id', auth()->id())->count();
+        $unlockedAchievements = Achievement::where('user_id', auth()->id())->where('is_unlocked', true)->count();
+
+        $achievementProgress = $totalAchievements > 0
+            ? round(($unlockedAchievements / $totalAchievements) * 100)
+            : 0;
+
+        $allItems = ChecklistItem::whereHas('category', function ($q) {
+            $q->where('user_id', auth()->id());
         })->get();
 
         $totalItems = $allItems->count();
@@ -38,6 +48,10 @@ class DashboardController extends Controller
 
         return view('dashboard', compact(
             'categories',
+            'recentAchievements',
+            'achievementProgress',
+            'unlockedAchievements',
+            'totalAchievements',
             'overallProgress',
             'completedItems',
             'totalItems',

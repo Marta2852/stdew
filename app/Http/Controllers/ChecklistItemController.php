@@ -7,13 +7,25 @@ use Illuminate\Http\Request;
 
 class ChecklistItemController
 {
-    public function index()
+    public function index(Request $request)
     {
-        $items = ChecklistItem::whereHas('category', function ($q) {
-            $q->where('user_id', auth()->id());
-        })->get();
+        $sort = $request->get('sort');
 
-        return view('items.index', compact('items'));
+        $query = ChecklistItem::with('category')->whereHas('category', function ($q) {
+            $q->where('user_id', auth()->id());
+        });
+
+        if ($sort === 'category') {
+            $items = $query
+                ->join('categories', 'checklist_items.category_id', '=', 'categories.id')
+                ->orderBy('categories.name')
+                ->select('checklist_items.*')
+                ->get();
+        } else {
+            $items = $query->get();
+        }
+
+        return view('items.index', compact('items', 'sort'));
     }
 
     public function toggle(ChecklistItem $item)
@@ -74,22 +86,22 @@ class ChecklistItemController
     return view('items.edit', compact('item'));
 }
 
-public function update(Request $request, ChecklistItem $item)
-{
-    if ($item->category->user_id !== auth()->id()) {
-        abort(403);
+    public function update(Request $request, ChecklistItem $item)
+    {
+        if ($item->category->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        $item->update([
+            'title' => $request->title,
+        ]);
+
+        return redirect()->route('items.index');
     }
-
-    $request->validate([
-        'title' => 'required|string|max:255',
-    ]);
-
-    $item->update([
-        'title' => $request->title,
-    ]);
-
-    return redirect()->route('categories.show', $item->category_id);
-}
 
 public function destroy(ChecklistItem $item)
 {
