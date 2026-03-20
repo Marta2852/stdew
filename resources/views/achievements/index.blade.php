@@ -7,14 +7,15 @@
                 <form method="POST" action="{{ route('achievements.toggle', $achievement) }}">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="flex flex-col items-center bg-gray-800 rounded-xl shadow p-3 hover:shadow-lg transition w-28">
+                    <button type="submit" 
+                            class="flex flex-col items-center bg-gray-800 rounded-xl shadow p-3 hover:shadow-lg transition w-28">
                         <div class="relative">
                             {{-- Achievement Image --}}
                             <img 
-                                src="{{ asset($achievement->image_path) }}" 
+                                src="{{ $achievement->image_url }}" 
                                 alt="{{ $achievement->name }}" 
                                 class="w-20 h-20 rounded-lg mb-2 transition-all
-                                       @if(!$achievement->is_unlocked) opacity-60 grayscale @endif"
+                                    @if(!$achievement->is_unlocked) opacity-60 grayscale @endif"
                             >
 
                             {{-- Checkmark if unlocked --}}
@@ -29,7 +30,7 @@
                         </span>
 
                         {{-- Achievement Description --}}
-                        <span class="text-[10px] text-gray-600 text-center">
+                        <span class="text-[10px] text-gray-400 text-center">
                             {{ $achievement->description }}
                         </span>
                     </button>

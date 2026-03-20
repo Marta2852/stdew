@@ -33,10 +33,11 @@
         @forelse($recentAchievements as $achievement)
             <div class="flex flex-col items-center bg-gray-800 rounded-xl shadow p-3">
                 <img 
-                    src="{{ asset($achievement->image_path) }}" 
-                    alt="{{ $achievement->name }}" 
-                    class="w-16 h-16 rounded-lg mb-2 transition-all"
-                >
+                src="{{ $achievement->image_url }}" 
+                alt="{{ $achievement->name }}" 
+                class="w-16 h-16 rounded-lg mb-2 transition-all"
+/>
+                
                 <span class="text-sm font-semibold text-center">
                     {{ $achievement->name }}
                 </span>
@@ -79,7 +80,7 @@
         <h2 class="text-xl font-bold mb-3"> Active Goals</h2>
 
             @if($activeItems->isEmpty())
-                <p class="text-gray-500">All tasks completed 🎉</p>
+                <p class="text-gray-500">All tasks completed </p>
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     @foreach ($activeItems as $item)

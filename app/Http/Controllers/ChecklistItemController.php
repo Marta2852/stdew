@@ -9,23 +9,7 @@ class ChecklistItemController
 {
     public function index(Request $request)
     {
-        $sort = $request->get('sort');
-
-        $query = ChecklistItem::with('category')->whereHas('category', function ($q) {
-            $q->where('user_id', auth()->id());
-        });
-
-        if ($sort === 'category') {
-            $items = $query
-                ->join('categories', 'checklist_items.category_id', '=', 'categories.id')
-                ->orderBy('categories.name')
-                ->select('checklist_items.*')
-                ->get();
-        } else {
-            $items = $query->get();
-        }
-
-        return view('items.index', compact('items', 'sort'));
+        return redirect()->route('categories.index', $request->query());
     }
 
     public function toggle(ChecklistItem $item)
@@ -74,7 +58,7 @@ class ChecklistItemController
             'category_id' => $request->category_id,
         ]);
 
-        return redirect()->route('categories.show', $request->category_id);
+        return redirect()->route('categories.index');
     }
 
     public function edit(ChecklistItem $item)
@@ -100,7 +84,7 @@ class ChecklistItemController
             'title' => $request->title,
         ]);
 
-        return redirect()->route('items.index');
+        return redirect()->route('categories.index');
     }
 
 public function destroy(ChecklistItem $item)

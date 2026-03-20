@@ -13,12 +13,7 @@
 
         <a href="{{ route('categories.index') }}"
         class="{{ request()->routeIs('categories.*') ? 'underline font-semibold' : '' }}">
-            Categories
-        </a>
-
-        <a href="{{ route('items.index') }}"
-        class="{{ request()->routeIs('items.*') ? 'underline font-semibold' : '' }}">
-        Checklist
+            Checklist
         </a>
 
         <a href="{{ route('achievements.index') }}"
@@ -26,6 +21,15 @@
         Achievements
         </a>
 
+        <a href="{{ route('animals.index') }}"
+        class="{{ request()->routeIs('animals.*') ? 'underline font-semibold' : '' }}">
+        Animals
+        </a>
+
+        <a href="{{ route('calendar.index') }}"
+        class="{{ request()->routeIs('calendar.*') ? 'underline font-semibold' : '' }}">
+        Calendar
+        </a>
 
         </div>
 

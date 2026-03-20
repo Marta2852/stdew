@@ -11,7 +11,7 @@ class Achievement extends Model
     protected $fillable = [
         'name',
         'description',
-        'image_path',
+        'image_path',      
         'is_unlocked',
         'user_id',
     ];
@@ -21,5 +21,8 @@ class Achievement extends Model
         return $this->belongsTo(User::class);
     }
 
-    
+    public function getImageUrlAttribute()
+{
+    return asset('achievements/' . $this->image_path);
+}
 }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
     Schema::create('achievements', function (Blueprint $table) {
         $table->id();
-        $table->string('name');            // e.g., "First Fish"
-        $table->string('description');     // e.g., "Catch your first fish"
-        $table->string('image_path');      // path to achievement image
+        $table->string('name');           
+        $table->string('description');     
+        $table->string('image_path');      
         $table->boolean('is_unlocked')->default(false);
         $table->foreignId('user_id')->constrained()->cascadeOnDelete();
         $table->timestamps();

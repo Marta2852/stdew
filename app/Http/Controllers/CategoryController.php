@@ -4,14 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\ChecklistItem;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::where('user_id', auth()->id())->get();
+        $categories = Category::where('user_id', auth()->id())
+            ->with('items')
+            ->get();
+        
+        $items = ChecklistItem::with('category')
+            ->whereHas('category', function ($q) {
+                $q->where('user_id', auth()->id());
+            })
+            ->get();
+        
+        $totalItems = $items->count();
+        $completedItems = $items->where('is_completed', true)->count();
+        $overallProgress = $totalItems > 0 ? ($completedItems / $totalItems) * 100 : 0;
 
-        return view('categories.index', compact('categories'));
+        return view('categories.index', compact('categories', 'items', 'overallProgress', 'totalItems', 'completedItems'));
     }
 
     public function create()

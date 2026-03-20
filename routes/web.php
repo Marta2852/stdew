@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChecklistItemController;
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\CalendarController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,4 +31,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/user/achievements', [AchievementController::class, 'index'])->name('achievements.index');
     Route::patch('/user/achievements/{achievement}/toggle', [AchievementController::class, 'toggle'])->name('achievements.toggle');
+
+
+    Route::get('/animals', [AnimalController::class,'index'])->name('animals.index');
+    Route::get('/animals/create', [AnimalController::class,'create'])->name('animals.create');
+    Route::post('/animals', [AnimalController::class,'store'])->name('animals.store');
+
+    Route::get('/calendar/{season?}', [CalendarController::class, 'index'])->name('calendar.index');
 });
+
+
+    
