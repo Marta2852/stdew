@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Event;
 
 class EventSeeder extends Seeder
 {
@@ -21,7 +22,17 @@ class EventSeeder extends Seeder
             [
                 'name' => 'Desert Festival',
                 'season' => 'spring',
-                'day' => 15,16,17
+                'day' => 15
+            ],
+            [
+                'name' => 'Desert Festival',
+                'season' => 'spring',
+                'day' => 16
+            ],
+            [
+                'name' => 'Desert Festival',
+                'season' => 'spring',
+                'day' => 17
             ],
             [
                 'name' => 'Flower Dance',
@@ -36,7 +47,12 @@ class EventSeeder extends Seeder
             [
                 'name' => 'Trout Derby',
                 'season' => 'Summer',
-                'day' => 20,21,
+                'day' => 20,
+            ],
+            [
+                'name' => 'Trout Derby',
+                'season' => 'Summer',
+                'day' => 21,
             ],
             [
                 'name' => 'Dance Of The Moodlight Jellies',
@@ -61,12 +77,27 @@ class EventSeeder extends Seeder
             [
                 'name' => 'SquidFest',
                 'season' => 'Winter',
-                'day' => 12,13
+                'day' => 12
+            ],
+            [
+                'name' => 'SquidFest',
+                'season' => 'Winter',
+                'day' => 13
             ],
             [
                 'name' => 'Night Market',
                 'season' => 'Winter',
-                'day' => 15,16,17
+                'day' => 15,
+            ],
+            [
+                'name' => 'Night Market',
+                'season' => 'Winter',
+                'day' => 16,
+            ],
+            [
+                'name' => 'Night Market',
+                'season' => 'Winter',
+                'day' => 17,
             ],
             [
                 'name' => 'Feast Of The Winter Star',
@@ -75,5 +106,6 @@ class EventSeeder extends Seeder
             ],
 
         ];
+        Event::insert($EventData);
     }
 }

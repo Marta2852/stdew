@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Crops;
 
 class CropSeeder extends Seeder
 {
@@ -68,10 +69,10 @@ class CropSeeder extends Seeder
                 'image_path' => 'Potato.png'
             ],
             [
-                'name' => 'Phubarb',
+                'name' => 'Rhubarb',
                 'season' => 'Spring',
                 'growth_time' => 13,
-                'image_path' => 'Phubarb.png'
+                'image_path' => 'Rhubarb.png'
             ],
             [
                 'name' => 'Strawberry',
@@ -275,5 +276,7 @@ class CropSeeder extends Seeder
 
 
         ];
+
+        Crops::insert($CropData);
     }
 }

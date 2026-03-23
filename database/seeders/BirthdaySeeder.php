@@ -1,7 +1,8 @@
-﻿<?php
+<?php
 
 namespace Database\Seeders;
 
+use App\Models\Birthday;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -221,5 +222,7 @@ class BirthdaySeeder extends Seeder
 
 
         ];
+
+        Birthday::insert($birthdayData);
     }
 }
